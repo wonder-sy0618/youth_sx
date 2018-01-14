@@ -7,6 +7,7 @@ import List from "antd-mobile/lib/list"
 import Picker from "antd-mobile/lib/picker"
 import WingBlank from "antd-mobile/lib/wing-blank"
 import ImagePicker from "antd-mobile/lib/image-picker"
+import TextareaItem from "antd-mobile/lib/textarea-item"
 
 import demo5 from "../res/demos/demo5.jpg"
 
@@ -72,6 +73,11 @@ export default (props) => {
             }]} >
               <List.Item arrow="horizontal" >我在</List.Item>
             </Picker>
+            <TextareaItem
+              title="我的青春宣言是"
+              placeholder="click the button below to focus"
+              autoHeight
+            />
             <List.Item
               extra={
                 <img
