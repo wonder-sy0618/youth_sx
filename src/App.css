@@ -1,28 +1,49 @@
-.App {
-  text-align: center;
+
+
+.ActInfo .am-card-header-content {
+  flex: 9 10;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.AllImage .am-flexbox-item {
+  margin-left: 0px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.AllImage .imgItem {
+  padding: 5px;
 }
 
-.App-title {
-  font-size: 1.5em;
+.AllImage img {
+  /* margin: 5px; */
+  width: 100%;
 }
 
-.App-intro {
-  font-size: large;
+.App .am-list-content {
+  font-size: 15px !important;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App .CompUploadHistory .am-list-content {
+  display: flex;
+}
+
+.App .CompUploadHistory .textTag {
+  display: inline-grid;
+  font-size: 11px;
+  line-height: 10px;
+  height: 28px;
+  text-align: right;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: #7d7d7d;
+}
+
+.App .historyItemImage {
+  display: flex;
+  flex : 1 3;
+}
+
+.App .historyItemText {
+  display: flex;
+  flex : 2 3;
+  margin-left: 10px;
 }

@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
+import { BrowserRouter, HashRouter, Switch, Route } from 'react-router-dom'
 import './App.css';
 
-import Button from 'antd/lib/button';
+import PageIndex from "./components/PageIndex"
+import PageUpload from "./components/PageUpload"
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-          <Button>antd</Button>
-        </p>
-      </div>
-    );
-  }
-}
+export default (props) => {
+  return (
+    <div className="App" >
 
-export default App;
+      <HashRouter>
+          <Switch >
+              <Route exact path='/' render={(props) => (<PageIndex></PageIndex>)} />
+              <Route exact path='/index' render={(props) => (<PageIndex></PageIndex>)} />
+              <Route exact path='/upload' render={(props) => (<PageUpload></PageUpload>)} />
+          </Switch>
+      </HashRouter>
+    </div>
+  )
+};
