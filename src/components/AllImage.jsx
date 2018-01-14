@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Flex from "antd-mobile/lib/flex"
 import WhiteSpace from "antd-mobile/lib/white-space"
+import PullToRefresh from "antd-mobile/lib/pull-to-refresh"
 
 import demo1 from "../res/demos/demo1.jpg"
 import demo2 from "../res/demos/demo2.jpg"
@@ -13,17 +14,19 @@ export default class AllImage extends Component {
 
   render() {
     return (
-      <Flex className="AllImage" align="start" >
-        <Flex.Item>
-          <div className="imgItem" ><img src={demo1} /></div>
-          <div className="imgItem" ><img src={demo2} /></div>
-        </Flex.Item>
-        <Flex.Item>
-          <div className="imgItem" ><img src={demo4} /></div>
-          <div className="imgItem" ><img src={demo5} /></div>
-          <div className="imgItem" ><img src={demo3} /></div>
-        </Flex.Item>
-      </Flex>
+      <PullToRefresh>
+        <Flex className="AllImage" align="start" >
+          <Flex.Item>
+            <div className="imgItem" ><img src={demo1} /></div>
+            <div className="imgItem" ><img src={demo2} /></div>
+          </Flex.Item>
+          <Flex.Item>
+            <div className="imgItem" ><img src={demo4} /></div>
+            <div className="imgItem" ><img src={demo5} /></div>
+            <div className="imgItem" ><img src={demo3} /></div>
+          </Flex.Item>
+        </Flex>
+      </PullToRefresh>
     );
   }
 
