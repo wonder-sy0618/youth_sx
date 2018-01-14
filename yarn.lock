@@ -7095,6 +7095,10 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
+zeptojs@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/zeptojs/-/zeptojs-1.1.4.tgz#82858c6093fa59f672f3e450f30c93ba49e05cca"
+
 zscroller@~0.4.0:
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/zscroller/-/zscroller-0.4.7.tgz#3956e6e7dfb5175058df0da9abae6e4834088f8a"
