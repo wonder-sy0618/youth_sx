@@ -15,9 +15,9 @@ import CompUploadHistory from "./CompUploadHistory"
 export default (props) => {
   return (
     <div className="PageUpload" >
-      <CompHeader></CompHeader>
-      <CompUploadForm></CompUploadForm>
-      <CompUploadHistory></CompUploadHistory>
+      <CompHeader {...this.props} ></CompHeader>
+      <CompUploadForm {...this.props} ></CompUploadForm>
+      <CompUploadHistory {...this.props} ></CompUploadHistory>
       <div style={{marginTop : "20px"}} ></div>
     </div>
   )

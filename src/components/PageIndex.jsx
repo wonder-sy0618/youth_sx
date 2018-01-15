@@ -7,8 +7,8 @@ import AllImage from "../components/AllImage"
 export default (props) => {
   return (
     <div className="PageIndex" >
-      <ActInfo></ActInfo>
-      <AllImage></AllImage>
+      <ActInfo {...this.props} ></ActInfo>
+      <AllImage {...this.props} ></AllImage>
     </div>
   )
 }
