@@ -51,3 +51,7 @@
 .App .am-textarea-label {
   width : 120px;
 }
+
+.form_item_iam .am-list-extra, .form_item_iwhere .am-list-extra  {
+  flex-basis: 70% !important;
+}

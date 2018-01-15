@@ -25,7 +25,9 @@ def upload(request):
         addtime=datetime.datetime.now().strftime("%Y%m%d%H%M%S"), \
         status_remove=0, \
         imgid=request.POST["imgid"], \
-        utext=request.POST["utext"] \
+        itext=request.POST["itext"] \
+        iam=request.POST["iam"] \
+        iwhere=request.POST["iwhere"] \
         )
     item.save()
     return HttpResponse(serializers.serialize('json', [item,]))
