@@ -75,4 +75,8 @@ def upload_token(request):
     token_dict['expire'] = expire_syncpoint
     token_dict['dir'] = upload_dir
     result = json.dumps(token_dict)
-    return HttpResponse(result)
+    # jsonp
+    if (request.GET["callback"]):
+        return HttpResponse(request.GET["callback"] + "(" + result + ")")
+    else:
+        return HttpResponse(result)
