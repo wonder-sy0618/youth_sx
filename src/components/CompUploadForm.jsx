@@ -145,6 +145,7 @@ export default class CompUploadForm extends Component {
     obj.uid = this.props.uid;
     zeptojs.ajax({
       url : apiBase + "upload",
+      type : 'POST',
       data : obj,
       dataType : 'json',
       success : function(json) {
