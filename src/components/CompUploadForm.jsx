@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import zeptojs from "zeptojs"
 import moment from "moment"
 import { regionData } from "element-china-area-data"
+import config from "../config"
 
 import Button from 'antd-mobile/lib/button';
 import Card from 'antd-mobile/lib/card';
@@ -15,10 +16,6 @@ import TextareaItem from "antd-mobile/lib/textarea-item"
 
 import demo5 from "../res/demos/demo5.jpg"
 
-const apiBase = "http://104.236.134.159:8000/api/"
-const resBase = "http://testactive.oss-cn-beijing.aliyuncs.com/"
-const imageMaxSize = 1000
-const pictureQuality = 0.3
 
 export default class CompUploadForm extends Component {
 
@@ -145,7 +142,7 @@ export default class CompUploadForm extends Component {
     let obj = this.state;
     obj.uid = this.props.uid;
     zeptojs.ajax({
-      url : apiBase + "upload",
+      url : config.apiBase + "upload",
       type : 'POST',
       data : obj,
       dataType : 'json',
@@ -176,17 +173,17 @@ export default class CompUploadForm extends Component {
           var canvas = document.createElement('canvas');
           // 设置大小
           if (img.width > img.height) {
-            if (img.width > imageMaxSize) {
-              canvas.width = imageMaxSize
-              canvas.height = img.height * imageMaxSize / img.width
+            if (img.width > config.imageMaxSize) {
+              canvas.width = config.imageMaxSize
+              canvas.height = img.height * config.imageMaxSize / img.width
             } else {
               canvas.width = img.width
               canvas.height = img.height
             }
           } else {
-            if (img.height > imageMaxSize) {
-              canvas.height = imageMaxSize
-              canvas.width = img.width * imageMaxSize / img.height
+            if (img.height > config.imageMaxSize) {
+              canvas.height = config.imageMaxSize
+              canvas.width = img.width * config.imageMaxSize / img.height
             } else {
               canvas.width = img.width
               canvas.height = img.height
@@ -202,7 +199,7 @@ export default class CompUploadForm extends Component {
               console.log(token)
               //
               let fileName = token.dir + moment().format("YYYYMMDDHHmmss") + Math.ceil(Math.random()*1000) + ".jpg";
-              let url = resBase + fileName;
+              let url = config.resBase + fileName;
               // 图片ajax上传
               let xhr = new XMLHttpRequest();
               xhr.open("POST", token.host, true);
@@ -230,7 +227,7 @@ export default class CompUploadForm extends Component {
               }
               xhr.send(form);
             })
-          }, "image/jpeg", pictureQuality);
+          }, "image/jpeg", config.pictureQuality);
         }
       };
       reader.readAsDataURL(e.target.files[0]);
@@ -241,7 +238,7 @@ export default class CompUploadForm extends Component {
   uploadToken() {
     return new Promise((resolve, reject) => {
       zeptojs.ajax({
-        url : apiBase + "upload_token",
+        url : config.apiBase + "upload_token",
         type : 'GET',
         dataType : 'jsonp',
         success : resolve,

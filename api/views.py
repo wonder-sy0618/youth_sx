@@ -16,6 +16,8 @@ def list(request):
     else:
         data = Item.objects.filter(status_remove=0)
     raw_data = serializers.serialize("python", data)
+    for item in raw_data:
+        i.fields.id = i.pk
     actual_data = [d['fields'] for d in raw_data]
     return HttpResponse(json.dumps(actual_data, ensure_ascii=False))
 
