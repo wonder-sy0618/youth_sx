@@ -25,6 +25,7 @@ def upload(request):
         addtime=datetime.datetime.now().strftime("%Y%m%d%H%M%S"), \
         status_remove=0, \
         imgid=request.POST["imgid"], \
+        imghdw=request.POST["imghdw"],  \
         itext=request.POST["itext"], \
         iam=request.POST["iam"], \
         iwhere=request.POST["iwhere"] \

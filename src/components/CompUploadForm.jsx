@@ -27,6 +27,7 @@ export default class CompUploadForm extends Component {
     this.state = {
       uploading : false,
       imgid : undefined,
+      imghdw : 1,
       iam : undefined,
       iwhere : undefined,
       itext : ''
@@ -216,6 +217,7 @@ export default class CompUploadForm extends Component {
                   if (xhr.status == 204 || xhr.status == 200) {
                     this.setState({
                       imgid : url,
+                      imghdw : canvas.height / canvas.width,
                       uploading : false
                     })
                   } else {
