@@ -241,7 +241,7 @@ export default class CompUploadForm extends Component {
       zeptojs.ajax({
         url : apiBase + "upload_token",
         type : 'GET',
-        dataType : 'json',
+        dataType : 'jsonp',
         success : resolve,
         error : reject
       })
