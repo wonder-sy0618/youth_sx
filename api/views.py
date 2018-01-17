@@ -42,7 +42,7 @@ def upload(request):
 
 def delete(request):
     Item.objects.filter(id=int(request.GET['id'])).filter(uid=request.GET['uid']).update(status_remove=1)
-    return '{"status" : "SUCCESS"}'
+    return HttpResponse('{"status" : "SUCCESS"}')
 
 def get_iso_8601(expire):
     gmt = datetime.datetime.fromtimestamp(expire).isoformat()
