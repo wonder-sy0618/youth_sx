@@ -13,6 +13,7 @@ import Picker from "antd-mobile/lib/picker"
 import WingBlank from "antd-mobile/lib/wing-blank"
 import ImagePicker from "antd-mobile/lib/image-picker"
 import TextareaItem from "antd-mobile/lib/textarea-item"
+import InputItem from "antd-mobile/lib/input-item"
 
 import demo5 from "../res/demos/demo5.jpg"
 
@@ -24,6 +25,7 @@ export default class CompUploadForm extends Component {
     this.state = {
       uploading : false,
       imgid : undefined,
+      iname : undefined,
       imghdw : 1,
       iam : undefined,
       iwhere : undefined,
@@ -40,6 +42,15 @@ export default class CompUploadForm extends Component {
         />
         <Card.Body>
           <List style={{ backgroundColor: 'white' }} className="">
+            <InputItem
+              type="text"
+              onChange={(e => {
+                this.setState({
+                  iname : e.target.value
+                })
+              }).bind(this)}
+              value={this.state.iname}
+            >我的名字</InputItem>
             <Picker
               title="我是"
               extra="请选择"
@@ -136,8 +147,14 @@ export default class CompUploadForm extends Component {
 
   onSubmit() {
     if (this.state.uploading) return;
+    //
+    if (!this.state.imgid || this.state.imgid.length <= 0) {
+      alert("请上传照片")
+      return;
+    }
+    //
     this.setState({
-      uploading : true
+      // uploading : true
     })
     let obj = this.state;
     obj.uid = this.props.uid;
@@ -196,7 +213,6 @@ export default class CompUploadForm extends Component {
           canvas.toBlob(blob => {
             // 开始上传
             this.uploadToken().then(token => {
-              console.log(token)
               //
               let fileName = token.dir + moment().format("YYYYMMDDHHmmss") + Math.ceil(Math.random()*1000) + ".jpg";
               let url = config.resBase + fileName;
@@ -226,7 +242,7 @@ export default class CompUploadForm extends Component {
                 }
               }
               xhr.send(form);
-            })
+            }).catch(err => alert("error : " + err))
           }, "image/jpeg", config.pictureQuality);
         }
       };
