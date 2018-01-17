@@ -31,7 +31,7 @@ export default class AllImage extends Component {
       loading : true
     })
     zeptojs.ajax({
-      url : config.apiBase + "list?page=10&lastid=" + (comp.state.oriList.length > 0 ? comp.state.oriList[comp.state.oriList.length-1].id : ''),
+      url : config.apiBase + "list?page=10&lastid=" + (comp.state.oriList.length > 0 ? comp.state.oriList[comp.state.oriList.length-1].id : '99999999'),
       dataType : 'json',
       success : function(json) {
         if (json.length <= 0) {
