@@ -171,9 +171,9 @@ export default class CompUploadForm extends Component {
 
   uploadFile() {
     if (this.state.uploading) return;
-    this.setState({
-      uploading : true
-    })
+    // this.setState({
+    //   uploading : true
+    // })
     let dom = zeptojs("input[type=file][name=tmp_image_upload]");
     if (dom.length > 0) {
       dom.remove();
@@ -187,7 +187,6 @@ export default class CompUploadForm extends Component {
         alert("base64 : " + base64.length)
         // 压缩图片
         let img = new Image();
-        img.src = base64;
         img.onload = () => {
           alert("img load")
           var canvas = document.createElement('canvas');
@@ -251,6 +250,7 @@ export default class CompUploadForm extends Component {
             }).catch(err => alert("error : " + err))
           }, "image/jpeg", config.pictureQuality);
         }
+        img.src = base64;
       };
       reader.readAsDataURL(e.target.files[0]);
     })
