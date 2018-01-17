@@ -19,11 +19,13 @@ from . import view
 from api.views import list as apiList
 from api.views import upload as apiUpload
 from api.views import upload_token as apiUploadToken
+from api.views import delete as apiDelete
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'api/list', apiList),
     url(r'api/upload_token', apiUploadToken),
     url(r'api/upload', apiUpload),
+    url(r'api/delete', apiDelete),
     url(r'^$', view.index),
 ]

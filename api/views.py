@@ -40,6 +40,9 @@ def upload(request):
     item.save()
     return HttpResponse(serializers.serialize('json', [item,]))
 
+def delete(request):
+    Item.objects.filter(id=int(request.GET['id'])).filter(uid=request.GET['uid']).update(status_remove=1)
+    return '{"status" : "SUCCESS"}'
 
 def get_iso_8601(expire):
     gmt = datetime.datetime.fromtimestamp(expire).isoformat()
