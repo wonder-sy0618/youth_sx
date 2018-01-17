@@ -63,7 +63,7 @@ export default class AllImage extends Component {
   render() {
     let domList1 = [], domList2 = []
     let domItemRender = (item) => {
-      return <div className="imgItem" ><img src={item.imgid} /></div>;
+      return <div key={"image_item_" + item.id} className="imgItem" ><img src={item.imgid} /></div>;
     }
     this.state.list1.forEach(item => domList1.push(domItemRender(item)))
     this.state.list2.forEach(item => domList2.push(domItemRender(item)))

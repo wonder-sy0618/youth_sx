@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
+from django.core.paginator import Paginator
 import json
 import datetime
 import time
@@ -12,9 +13,12 @@ from api.models import Item
 
 def list(request):
     if 'uid' in request.GET:
-        data = Item.objects.filter(status_remove=0).filter(uid=request.GET["uid"])
+        data = Item.objects.filter(status_remove=0).filter(uid=request.GET["uid"]).order_by("-id")
     else:
-        data = Item.objects.filter(status_remove=0)
+        if 'lastid' in request.GET:
+            data = Item.objects.filter(status_remove=0).filter(id__lt=int(request.GET["lastid"])).order_by("-id")[:int(request.GET["page"])]
+        else:
+            data = Item.objects.filter(status_remove=0).order_by("-id")[:int(request.GET["page"])]
     raw_data = serializers.serialize("python", data)
     for item in raw_data:
         item['fields']['id'] = item['pk']
