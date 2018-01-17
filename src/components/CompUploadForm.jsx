@@ -44,9 +44,9 @@ export default class CompUploadForm extends Component {
           <List style={{ backgroundColor: 'white' }} className="">
             <InputItem
               type="text"
-              onChange={(e => {
+              onChange={(val => {
                 this.setState({
-                  iname : e.target.value
+                  iname : val
                 })
               }).bind(this)}
               value={this.state.iname}
