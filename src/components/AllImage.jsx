@@ -35,7 +35,7 @@ export default class AllImage extends Component {
       dataType : 'json',
       success : function(json) {
         if (json.length <= 0) {
-          this.setState({
+          comp.setState({
             hasnext : false,
             loading : false
           })

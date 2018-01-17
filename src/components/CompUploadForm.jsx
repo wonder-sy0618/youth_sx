@@ -153,9 +153,9 @@ export default class CompUploadForm extends Component {
       return;
     }
     //
-    this.setState({
-      // uploading : true
-    })
+    // this.setState({
+    //   uploading : true
+    // })
     let obj = this.state;
     obj.uid = this.props.uid;
     zeptojs.ajax({
@@ -211,8 +211,10 @@ export default class CompUploadForm extends Component {
           context.drawImage(img, 0, 0, canvas.width, canvas.height);
           // canvas转为blob并上传
           canvas.toBlob(blob => {
+            alert("blob : " + blob)
             // 开始上传
             this.uploadToken().then(token => {
+              alert("token : " + token)
               //
               let fileName = token.dir + moment().format("YYYYMMDDHHmmss") + Math.ceil(Math.random()*1000) + ".jpg";
               let url = config.resBase + fileName;
@@ -228,6 +230,7 @@ export default class CompUploadForm extends Component {
               xhr.onreadystatechange = (e) => {
                 if (xhr.readyState == 4) {
                   if (xhr.status == 204 || xhr.status == 200) {
+                    alert("ready : " + xhr)
                     this.setState({
                       imgid : url,
                       imghdw : canvas.height / canvas.width,
