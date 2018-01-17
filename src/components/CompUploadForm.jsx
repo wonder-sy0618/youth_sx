@@ -212,6 +212,7 @@ export default class CompUploadForm extends Component {
           let context = canvas.getContext('2d');
           context.drawImage(img, 0, 0, canvas.width, canvas.height);
           // canvas转为blob并上传
+          alert("pre blob")
           canvas.toBlob(blob => {
             alert("blob : " + blob)
             // 开始上传
