@@ -4,7 +4,7 @@ import config from "../config"
 
 import Flex from "antd-mobile/lib/flex"
 import WhiteSpace from "antd-mobile/lib/white-space"
-import PullToRefresh from "antd-mobile/lib/pull-to-refresh"
+import Infinite from 'react-infinite-loading'
 
 import demo1 from "../res/demos/demo1.jpg"
 import demo2 from "../res/demos/demo2.jpg"
@@ -17,22 +17,27 @@ export default class AllImage extends Component {
   constructor() {
     super();
     this.state = {
+      oriList : [],
       list1 : [],
       list2 : [],
-      hasnext : true
+      hasnext : true,
+      loading : false
     }
   }
 
-  componentDidMount() {
+  loadData() {
     let comp = this;
+    comp.setState({
+      loading : true
+    })
     zeptojs.ajax({
-      url : config.apiBase + "list",
+      url : config.apiBase + "list?page=10&lastid=" + (comp.state.oriList.length > 0 ? comp.state.oriList[comp.state.oriList.length-1].id : ''),
       dataType : 'json',
       success : function(json) {
-        console.log(json)
-        if (json.lensth <= 0) {
+        if (json.length <= 0) {
           this.setState({
-            hasnext : false
+            hasnext : false,
+            loading : false
           })
         } else {
           let allSize = (list) => {
@@ -52,12 +57,18 @@ export default class AllImage extends Component {
             }
           })
           comp.setState({
+            oriList : json,
             list1 : newList1,
-            list2 : newList2
+            list2 : newList2,
+            loading : false
           })
         }
       }
     })
+  }
+
+  componentDidMount() {
+    this.loadData()
   }
 
   render() {
@@ -68,7 +79,7 @@ export default class AllImage extends Component {
     this.state.list1.forEach(item => domList1.push(domItemRender(item)))
     this.state.list2.forEach(item => domList2.push(domItemRender(item)))
     return (
-      <PullToRefresh>
+      <Infinite handleLoading={this.loadData.bind(this)} loading={this.state.loading} >
         <Flex className="AllImage" align="start" >
           <Flex.Item>
             {domList1}
@@ -77,7 +88,7 @@ export default class AllImage extends Component {
             {domList2}
           </Flex.Item>
         </Flex>
-      </PullToRefresh>
+      </Infinite>
     );
   }
 

@@ -5393,6 +5393,12 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
+react-infinite-loading@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-infinite-loading/-/react-infinite-loading-1.0.0.tgz#ffae6d38400134f8c90d91e44b06c891236611d2"
+  dependencies:
+    prop-types "^15.6.0"
+
 react-native-camera-roll-picker@^1.2.1:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-native-camera-roll-picker/-/react-native-camera-roll-picker-1.2.3.tgz#b117fd3a2b9012dcccee1261a9bc427226b8d6d2"
