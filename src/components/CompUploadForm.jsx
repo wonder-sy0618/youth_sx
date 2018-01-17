@@ -180,15 +180,12 @@ export default class CompUploadForm extends Component {
     }
     dom = zeptojs("<input type='file' name='tmp_image_upload' style='display:none;' accept='image/*' />").appendTo("body");
     dom.change(e => {
-    alert("change : " )
       let reader = new FileReader();
       reader.onload = () => {
         let base64 = reader.result;
-        alert("base64 : " + base64.length)
         // 压缩图片
         let img = new Image();
         img.onload = () => {
-          alert("img load")
           var canvas = document.createElement('canvas');
           // 设置大小
           if (img.width > img.height) {
@@ -212,12 +209,9 @@ export default class CompUploadForm extends Component {
           let context = canvas.getContext('2d');
           context.drawImage(img, 0, 0, canvas.width, canvas.height);
           // canvas转为blob并上传
-          alert("pre blob")
           canvas.toBlob(blob => {
-            alert("blob : " + blob)
             // 开始上传
             this.uploadToken().then(token => {
-              alert("token : " + token)
               //
               let fileName = token.dir + moment().format("YYYYMMDDHHmmss") + Math.ceil(Math.random()*1000) + ".jpg";
               let url = config.resBase + fileName;
@@ -233,7 +227,6 @@ export default class CompUploadForm extends Component {
               xhr.onreadystatechange = (e) => {
                 if (xhr.readyState == 4) {
                   if (xhr.status == 204 || xhr.status == 200) {
-                    alert("ready : " + xhr)
                     this.setState({
                       imgid : url,
                       imghdw : canvas.height / canvas.width,
