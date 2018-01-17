@@ -180,9 +180,11 @@ export default class CompUploadForm extends Component {
     }
     dom = zeptojs("<input type='file' name='tmp_image_upload' style='display:none;' accept='image/*' />").appendTo("body");
     dom.change(e => {
+    alert("change : " )
       let reader = new FileReader();
       reader.onload = () => {
         let base64 = reader.result;
+        alert("base64 : " + base64.length)
         // 压缩图片
         let img = new Image();
         img.src = base64;
