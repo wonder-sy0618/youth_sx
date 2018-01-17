@@ -189,6 +189,7 @@ export default class CompUploadForm extends Component {
         let img = new Image();
         img.src = base64;
         img.onload = () => {
+          alert("img load")
           var canvas = document.createElement('canvas');
           // 设置大小
           if (img.width > img.height) {
