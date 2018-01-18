@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
+from django.db import connection, transaction
 from django.core.paginator import Paginator
 import json
 import datetime
@@ -12,18 +13,34 @@ from hashlib import sha1 as sha
 from api.models import Item
 
 def list(request):
+    andWhere = " and status_remove = 0 "
+    sqlArges = []
     if 'uid' in request.GET:
-        data = Item.objects.filter(status_remove=0).filter(uid=request.GET["uid"]).order_by("-id")
+        andWhere = " and uid = %s "
+        sqlArges.append(request.GET["uid"])
     else:
         if 'lastid' in request.GET:
-            data = Item.objects.filter(status_remove=0).filter(id__lt=int(request.GET["lastid"])).order_by("-id")[:int(request.GET["page"])]
-        else:
-            data = Item.objects.filter(status_remove=0).order_by("-id")[:int(request.GET["page"])]
-    raw_data = serializers.serialize("python", data)
-    for item in raw_data:
-        item['fields']['id'] = item['pk']
-    actual_data = [d['fields'] for d in raw_data]
-    return HttpResponse(json.dumps(actual_data, ensure_ascii=False))
+            andWhere = " and id < %s "
+            sqlArges.append(request.GET["lastid"])
+    cursor = connection.cursor()
+    cursor.execute( \
+        "select * from (" +\
+        "SELECT id," +\
+            "(select count(1) +1 from api_item si where si.iwhere = i.iwhere and si.id < i.id) as iwhereid, " +\
+            "uid, addtime, status_remove, imgid, iam, itext, iwhere, imghdw, iname, igps "+\
+            "FROM api_item i "+\
+        ") t "+\
+        "where 1 = 1 "+andWhere+\
+        "order by id desc", \
+        sqlArges)
+    results = []
+    columns = [column[0] for column in cursor.description]
+    for row in cursor.fetchall():
+        results.append(dict(zip(columns, row)))
+    if 'page' in request.GET:
+        return HttpResponse(json.dumps(results[:int(request.GET['page'])], ensure_ascii=False))
+    else:
+        return HttpResponse(json.dumps(results, ensure_ascii=False))
 
 def upload(request):
     item = Item( \
