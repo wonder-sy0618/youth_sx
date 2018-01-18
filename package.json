@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd-mobile": "^2.0.0",
+    "echarts": "^4.0.2",
     "element-china-area-data": "^4.0.0",
     "moment": "^2.20.1",
     "react": "^16.2.0",

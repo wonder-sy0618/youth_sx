@@ -60,7 +60,8 @@ export default class AllImage extends Component {
             oriList : json,
             list1 : newList1,
             list2 : newList2,
-            loading : false
+            loading : false,
+            hasnext : json.length >= 10
           })
         }
       }
@@ -79,7 +80,7 @@ export default class AllImage extends Component {
     this.state.list1.forEach(item => domList1.push(domItemRender(item)))
     this.state.list2.forEach(item => domList2.push(domItemRender(item)))
     return (
-      <Infinite handleLoading={this.loadData.bind(this)} loading={this.state.loading} >
+      <Infinite handleLoading={this.loadData.bind(this)} loading={this.state.loading || !this.state.hasnext} scrollThreshold={100} >
         <Flex className="AllImage" align="start" >
           <Flex.Item>
             {domList1}

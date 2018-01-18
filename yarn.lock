@@ -1293,6 +1293,10 @@ caniuse-lite@^1.0.30000748, caniuse-lite@^1.0.30000789:
   version "1.0.30000791"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000791.tgz#8e35745efd483a3e23bb7d350990326d2319fc16"
 
+canvas-to-blob@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/canvas-to-blob/-/canvas-to-blob-0.0.0.tgz#f1db4dd083ddc74a78fe5bce6a869786b59f51f3"
+
 capture-stack-trace@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.0.tgz#4a6fa07399c26bba47f0b2496b4d0fb408c5550d"
@@ -2059,6 +2063,12 @@ ecc-jsbn@~0.1.1:
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
   dependencies:
     jsbn "~0.1.0"
+
+echarts@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.0.2.tgz#c405e9e479af982383c8ae2b5946e52d058c6220"
+  dependencies:
+    zrender "4.0.1"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -7126,6 +7136,10 @@ yargs@~3.10.0:
 zeptojs@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/zeptojs/-/zeptojs-1.1.4.tgz#82858c6093fa59f672f3e450f30c93ba49e05cca"
+
+zrender@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.0.1.tgz#961e77abc5042eaa624b5230f8d673bf648298e9"
 
 zscroller@~0.4.0:
   version "0.4.7"

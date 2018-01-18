@@ -17,6 +17,9 @@ import InputItem from "antd-mobile/lib/input-item"
 
 import demo5 from "../res/demos/demo5.jpg"
 
+const BMap = window.BMap;
+const BMAP_STATUS_SUCCESS = window.BMAP_STATUS_SUCCESS;
+
 
 export default class CompUploadForm extends Component {
 
@@ -29,9 +32,45 @@ export default class CompUploadForm extends Component {
       imghdw : 1,
       iam : undefined,
       iwhere : undefined,
+      igps : undefined,
       itext : ''
     }
   }
+
+  componentDidMount() {
+    let comp = this;
+    // 百度地图API功能
+  	var map = new BMap.Map("allmap");
+  	var point = new BMap.Point(108.953507,34.265846);
+  	map.centerAndZoom(point,12);
+    map.disableDragging();     //禁止拖拽
+
+  	var geolocation = new BMap.Geolocation();
+  	geolocation.getCurrentPosition(function(r){
+  		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+  			var mk = new BMap.Marker(r.point);
+  			map.addOverlay(mk);
+        // 移动地图
+  			map.panTo(r.point);
+
+        // 获取地市
+        var gc = new BMap.Geocoder();
+        gc.getLocation(r.point, function(rs){
+            var addComp = rs.addressComponents;
+            var address =  addComp.province +  addComp.city + addComp.district + addComp.street + addComp.streetNumber;//获取地址
+            //
+            comp.setState({
+              igps : r.point.lng+','+r.point.lat,
+              iwhere : addComp.province + "," + addComp.city + "," + addComp.district
+            })
+        });
+  		}
+  		else {
+  			alert('failed'+this.getStatus());
+  		}
+  	},{enableHighAccuracy: true})
+  }
+
   render() {
     return (
       <Card style={{
@@ -97,6 +136,9 @@ export default class CompUploadForm extends Component {
               }).bind(this)} >
                 <List.Item arrow="horizontal" className="form_item_iwhere" >我在</List.Item>
               </Picker>
+              <List.Item className="form_item_igps" >
+      	           <div id="allmap" style={{height: 200}}></div>
+              </List.Item>
               <TextareaItem
                 title="我的青春宣言是"
                 placeholder=""
