@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import SxMap from "../components/SxMap"
+// import SxMap from "../components/SxMap"
 import ActInfo from "../components/ActInfo"
 import AllImage from "../components/AllImage"
 

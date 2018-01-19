@@ -187,7 +187,7 @@ export default class CompUploadForm extends Component {
       data : obj,
       dataType : 'json',
       success : function(json) {
-        window.location.href = "#/proview/" + json.pk
+        window.location.href = "#/proview/" + json[0].pk
       }
     })
   }
