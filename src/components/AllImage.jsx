@@ -50,7 +50,8 @@ export default class AllImage extends Component {
           let newList1 = comp.state.list1;
           let newList2 = comp.state.list2;
           json.forEach(item => {
-            if (allSize(newList1) < allSize(newList2)) {
+            if (item.imgid != '' && item.imgid != 'undefined'
+                    && allSize(newList1) < allSize(newList2)) {
               newList1.push(item)
             } else {
               newList2.push(item)
