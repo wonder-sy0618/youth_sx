@@ -30,7 +30,7 @@ export default class CompUploadForm extends Component {
       imgid : undefined,
       iname : undefined,
       imghdw : 1,
-      iam : undefined,
+      iam : '普通青年',
       iwhere : undefined,
       igps : undefined,
       itext : ''
@@ -90,25 +90,6 @@ export default class CompUploadForm extends Component {
               }).bind(this)}
               value={this.state.iname}
             >我的名字</InputItem>
-            <Picker
-              title="我是"
-              extra="请选择"
-              cols={1}
-              value={this.state.iam ? [this.state.iam] : []}
-              data={[{
-                label: '普通青年',
-                value: '普通青年',
-              }, {
-                label: '往届陕西好青年',
-                value: '往届陕西好青年',
-              }]}
-              onChange={((sel) => {
-                this.setState({
-                  iam : sel[0]
-                })
-              }).bind(this)} >
-                <List.Item arrow="horizontal" className="form_item_iam" >我是</List.Item>
-            </Picker>
             <Picker
               title="我在"
               extra="请选择"
@@ -206,7 +187,7 @@ export default class CompUploadForm extends Component {
       data : obj,
       dataType : 'json',
       success : function(json) {
-        window.location.href = "#/proview/" + json.id
+        window.location.href = "#/proview/" + json.pk
       }
     })
   }
