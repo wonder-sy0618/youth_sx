@@ -55,3 +55,8 @@
 .form_item_iam .am-list-extra, .form_item_iwhere .am-list-extra  {
   flex-basis: 70% !important;
 }
+
+.am-icon-md {
+  width: 60px;
+    height: 60px;
+}
