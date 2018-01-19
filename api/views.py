@@ -16,14 +16,14 @@ def list(request):
     andWhere = " and status_remove = 0 "
     sqlArges = []
     if 'uid' in request.GET:
-        andWhere = " and uid = %s "
+        andWhere = andWhere + " and uid = %s "
         sqlArges.append(request.GET["uid"])
     elif 'id' in request.GET:
-        andWhere = " and id = %s "
+        andWhere = andWhere + " and id = %s "
         sqlArges.append(request.GET["id"])
     else:
         if 'lastid' in request.GET:
-            andWhere = " and id < %s "
+            andWhere = andWhere + " and id < %s "
             sqlArges.append(request.GET["lastid"])
     cursor = connection.cursor()
     cursor.execute( \
