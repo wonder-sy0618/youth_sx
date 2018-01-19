@@ -18,6 +18,9 @@ def list(request):
     if 'uid' in request.GET:
         andWhere = " and uid = %s "
         sqlArges.append(request.GET["uid"])
+    elif 'id' in request.GET:
+        andWhere = " and id = %s "
+        sqlArges.append(request.GET["id"])
     else:
         if 'lastid' in request.GET:
             andWhere = " and id < %s "
