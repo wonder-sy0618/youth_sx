@@ -6,11 +6,7 @@ import Flex from "antd-mobile/lib/flex"
 import WhiteSpace from "antd-mobile/lib/white-space"
 import Infinite from 'react-infinite-loading'
 
-import demo1 from "../res/demos/demo1.jpg"
-import demo2 from "../res/demos/demo2.jpg"
-import demo3 from "../res/demos/demo3.jpg"
-import demo4 from "../res/demos/demo4.jpg"
-import demo5 from "../res/demos/demo5.jpg"
+import AllImageItem from "./AllImageItem"
 
 export default class AllImage extends Component {
 
@@ -50,8 +46,10 @@ export default class AllImage extends Component {
           let newList1 = comp.state.list1;
           let newList2 = comp.state.list2;
           json.forEach(item => {
-            if (item.imgid != '' && item.imgid != 'undefined'
-                    && allSize(newList1) < allSize(newList2)) {
+            if (item.imgid == '' || item.imgid == 'undefined') {
+              return;
+            }
+            if (allSize(newList1) < allSize(newList2)) {
               newList1.push(item)
             } else {
               newList2.push(item)
@@ -76,7 +74,7 @@ export default class AllImage extends Component {
   render() {
     let domList1 = [], domList2 = []
     let domItemRender = (item) => {
-      return <div key={"image_item_" + item.id} className="imgItem" ><img src={item.imgid} /></div>;
+      return <AllImageItem key={"image_item_" + item.id} item={item} ></AllImageItem>;
     }
     this.state.list1.forEach(item => domList1.push(domItemRender(item)))
     this.state.list2.forEach(item => domList2.push(domItemRender(item)))

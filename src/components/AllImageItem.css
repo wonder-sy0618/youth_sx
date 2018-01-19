@@ -1,0 +1,55 @@
+
+
+.imgItem {
+  position: relative;
+}
+.imgItem div {
+  position: absolute;
+}
+
+.imgItem .name {
+  top: 10%;
+  left: 10px;
+  color: white;
+  font-size: 14px;
+  text-shadow:5px 2px 6px #000;
+}
+.imgItem .name span {
+  padding-left: 4px;
+  font-size: 18px;
+  color: #81ffd1;
+  font-weight: 500;
+}
+.imgItem .local {
+    left : 40px;
+    color: white;
+    font-size: 14px;
+    text-shadow:5px 2px 6px #000;
+}
+.imgItem.item_vertical_1 .local {
+    top: 18%;
+}
+.imgItem.item_horizontal_1 .local {
+    top: 26%;
+}
+.imgItem .declaration_title {
+  display:none;
+  left : 10px;
+  top: 45%;
+  color: #c13328;
+  font-size: 14px;
+  text-shadow: 5px 2px 6px #000;
+}
+.imgItem .declaration_content {
+  left : 30px;
+  color: #c13328;
+  font-size: 16px;
+  text-shadow: 2px 2px 3px #807d7d;
+  font-family: STKaiti,SimHei,"STXinwei","微软雅黑",sans-serif;
+}
+.imgItem.item_vertical_1 .declaration_content {
+  top: 60%;
+}
+.imgItem.item_horizontal_1 .declaration_content {
+  top: 50%;
+}
