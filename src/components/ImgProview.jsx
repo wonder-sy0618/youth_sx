@@ -81,14 +81,14 @@ export default class ImgProview extends Component {
         })
     //
     imgtreat.textDraw(canvas, "我是陕西好青年",
-        80, 130, {
+        80, 100, {
           fillStyle : "black",
           font : '40px Arial',
           lineSpacing : 1.2,
           middlePos : false
         })
     imgtreat.textDraw(canvas, "我是陕西好青年",
-        75, 125, {
+        75, 95, {
           fillStyle : "white",
           font : '40px Arial',
           lineSpacing : 1.2,
@@ -96,7 +96,7 @@ export default class ImgProview extends Component {
         })
     //
     imgtreat.textDraw(canvas, item.iname,
-        380, 100, {
+        380, 70, {
           fillStyle : "blue",
           font : '60px Arial',
           lineSpacing : 1.2,
@@ -104,14 +104,14 @@ export default class ImgProview extends Component {
         })
     //
     imgtreat.textDraw(canvas, "我在" + item.iwhere.replace("陕西省,","").replace(",",""),
-        285, 205, {
+        285, 175, {
           fillStyle : "black",
           font : '40px Arial',
           lineSpacing : 1.2,
           middlePos : false
         })
     imgtreat.textDraw(canvas, "我在" + item.iwhere.replace("陕西省,","").replace(",",""),
-        280, 200, {
+        280, 170, {
           fillStyle : "white",
           font : '40px Arial',
           lineSpacing : 1.2,
@@ -119,14 +119,14 @@ export default class ImgProview extends Component {
         })
     //
     imgtreat.textDraw(canvas, "我的青春宣言是",
-        71, 321, {
+        71, 291, {
           fillStyle : "white",
           font : '46px Arial',
           lineSpacing : 1.2,
           middlePos : false
         })
     imgtreat.textDraw(canvas, "我的青春宣言是",
-        70, 320, {
+        70, 290, {
           fillStyle : "red",
           font : '46px Arial',
           lineSpacing : 1.2,
@@ -134,14 +134,14 @@ export default class ImgProview extends Component {
         })
     //
     imgtreat.textDraw(canvas, item.itext.replace("，", "，\n").replace(",", "，\n"),
-        171, 401, {
+        171, 371, {
           fillStyle : "white",
           font : '46px STKaiti,SimHei,"STXinwei","微软雅黑",sans-serif',
           lineSpacing : 1.2,
           middlePos : false
         })
     imgtreat.textDraw(canvas, item.itext.replace("，", "，\n").replace(",", "，\n"),
-        170, 400, {
+        170, 370, {
           fillStyle : "red",
           font : '46px STKaiti,SimHei,"STXinwei","微软雅黑",sans-serif',
           lineSpacing : 1.2,
@@ -244,7 +244,8 @@ export default class ImgProview extends Component {
           item.imgid
         ).then(img => {
           // 计算宽高
-          let width = window.innerWidth * 2;
+          // let width = window.innerWidth * 2;
+          let width = 1000;
           let height = img.height * width / img.width
           //
           imgtreat.create(
