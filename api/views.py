@@ -50,14 +50,14 @@ def upload(request):
         uid=request.POST["uid"], \
         addtime=datetime.datetime.now().strftime("%Y%m%d%H%M%S"), \
         status_remove=0, \
-        imgid=("imgid" in request.POST ? request.POST["imgid"] : ""), \
-        iname=("iname" in request.POST ? request.POST["iname"] : ""), \
-        imghdw=("imghdw" in request.POST ? request.POST["imghdw"] : 1),  \
-        itext=("itext" in request.POST ? request.POST["itext"] : ""), \
-        iam=("iam" in request.POST ? request.POST["iam"] : ""), \
-        igps=("igps" in request.POST ? request.POST["igps"] : ""), \
-        igpswhere=("igpswhere" in request.POST ? request.POST["igpswhere"] : "陕西省"), \
-        iwhere=("iwhere" in request.POST ? request.POST["iwhere"] : "") \
+        imgid=(request.POST["imgid"] if "imgid" in request.POST else "" ), \
+        iname=(request.POST["iname"] if "iname" in request.POST else "" ), \
+        imghdw=(request.POST["imghdw"] if "imghdw" in request.POST else 1 ), \
+        itext=(request.POST["itext"] if "itext" in request.POST else "" ), \
+        iam=(request.POST["iam"] if "iam" in request.POST else "" ), \
+        igps=(request.POST["igps"] if "igps" in request.POST else "" ), \
+        igpswhere=(request.POST["igpswhere"] if "igpswhere" in request.POST else "陕西省" ), \
+        iwhere=(request.POST["iwhere"] if "iwhere" in request.POST else "" ) \
         )
     item.save()
     return HttpResponse(serializers.serialize('json', [item,]))
