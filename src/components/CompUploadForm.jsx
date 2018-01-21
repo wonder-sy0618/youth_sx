@@ -33,6 +33,7 @@ export default class CompUploadForm extends Component {
       iam : '普通青年',
       iwhere : undefined,
       igps : undefined,
+      igpswhere : undefined,
       itext : ''
     }
   }
@@ -61,7 +62,8 @@ export default class CompUploadForm extends Component {
             //
             comp.setState({
               igps : r.point.lng+','+r.point.lat,
-              iwhere : addComp.province + "," + addComp.city + "," + addComp.district
+              iwhere : addComp.province + "," + addComp.city + "," + addComp.district,
+              igpswhere : addComp.province + "," + addComp.city + "," + addComp.district
             })
         });
   		}

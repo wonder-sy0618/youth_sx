@@ -30,7 +30,7 @@ def list(request):
         "select * from (" +\
         "SELECT id," +\
             "(select count(1) +1 from api_item si where si.iwhere = i.iwhere and si.id < i.id) as iwhereid, " +\
-            "uid, addtime, status_remove, imgid, iam, itext, iwhere, imghdw, iname, igps "+\
+            "uid, addtime, status_remove, imgid, iam, itext, iwhere, imghdw, iname, igps, igpswhere "+\
             "FROM api_item i "+\
         ") t "+\
         "where 1 = 1 "+andWhere+\
