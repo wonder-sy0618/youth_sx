@@ -40,10 +40,11 @@ def mapdata(request):
         #
         # let key = igpswhere if igpswhere != '陕西省' or igpswhere != '陕西省,,' else '陕西省,西安市,莲湖区'
         # let gps = igps if igps != '' else '108.9533138360,34.2655919355'
-        if (igpswhere is None and iwhere is not None):
-            igpswhere = iwhere
         if igpswhere == '陕西省' or igpswhere == '陕西省,,':
-            igpswhere = '陕西省,西安市,莲湖区'
+            if (iwhere == '陕西省' or iwhere == '陕西省,,'):
+                igpswhere = '陕西省,西安市,莲湖区'
+            else :
+                igpswhere = iwhere
         if igpswhere not in areaMap:
             areaMap[igpswhere] = []
         if (igps != '' or igps.find(",") >= 0):
