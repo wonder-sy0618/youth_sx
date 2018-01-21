@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
+import jquery from "jquery"
 
 import logo from "../res/logo.png"
 
 import Button from 'antd-mobile/lib/button';
 import Card from 'antd-mobile/lib/card';
 import WhiteSpace from 'antd-mobile/lib/white-space';
+import Icon from "antd-mobile/lib/icon"
 
 import CompHeader from "./CompHeader"
 
@@ -26,15 +28,37 @@ export default (props) => {
       </Card.Body>
       <Card.Footer
         extra={
-          <Button
-            type="primary"
-            inline={true}
-            size="small"
-            onClick={() => {
-              window.location.href = "#/upload"
+          <div>
+            <Button
+              type="primary"
+              inline={true}
+              size="small"
+              onClick={() => {
+                window.location.href = "#/upload"
+              }}
+              >我也要为陕西好青年代言</Button>
+            <div style={{
+              position: 'fixed',
+              right: 0,
+              top: 0
             }}
-            >我也要为陕西好青年代言</Button>
-        } />
+            onClick={(() => {
+              // 展开地图层
+              jquery(".pageIndexDialog").show().animate({
+                overflow: 'auto',
+                marginLeft : 0,
+                width : window.innerWidth,
+                height : window.innerHeight,
+                top : 0
+              }, 800, () => {
+              })
+            }).bind(this)} >
+              <Icon type="down" style={{width: 30}} />
+            </div>
+          </div>
+        } >
+
+        </Card.Footer>
     </CompHeader>
   )
 }

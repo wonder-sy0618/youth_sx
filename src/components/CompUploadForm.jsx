@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import zeptojs from "zeptojs"
+import jquery from "jquery"
 import moment from "moment"
 import { regionData } from "element-china-area-data"
 import config from "../config"
@@ -53,6 +53,9 @@ export default class CompUploadForm extends Component {
   			map.addOverlay(mk);
         // 移动地图
   			map.panTo(r.point);
+        comp.setState({
+          igps : r.point.lng+','+r.point.lat
+        })
 
         // 获取地市
         var gc = new BMap.Geocoder();
@@ -61,7 +64,6 @@ export default class CompUploadForm extends Component {
             var address =  addComp.province +  addComp.city + addComp.district + addComp.street + addComp.streetNumber;//获取地址
             //
             comp.setState({
-              igps : r.point.lng+','+r.point.lat,
               iwhere : addComp.province + "," + addComp.city + "," + addComp.district,
               igpswhere : addComp.province + "," + addComp.city + "," + addComp.district
             })
@@ -183,7 +185,7 @@ export default class CompUploadForm extends Component {
     // })
     let obj = this.state;
     obj.uid = this.props.uid;
-    zeptojs.ajax({
+    jquery.ajax({
       url : config.apiBase + "upload",
       type : 'POST',
       data : obj,
@@ -199,11 +201,11 @@ export default class CompUploadForm extends Component {
     // this.setState({
     //   uploading : true
     // })
-    let dom = zeptojs("input[type=file][name=tmp_image_upload]");
+    let dom = jquery("input[type=file][name=tmp_image_upload]");
     if (dom.length > 0) {
       dom.remove();
     }
-    dom = zeptojs("<input type='file' name='tmp_image_upload' style='display:none;' accept='image/*' />").appendTo("body");
+    dom = jquery("<input type='file' name='tmp_image_upload' style='display:none;' accept='image/*' />").appendTo("body");
     dom.change(e => {
       let reader = new FileReader();
       reader.onload = () => {
@@ -278,7 +280,7 @@ export default class CompUploadForm extends Component {
 
   uploadToken() {
     return new Promise((resolve, reject) => {
-      zeptojs.ajax({
+      jquery.ajax({
         url : config.apiBase + "upload_token",
         type : 'GET',
         dataType : 'jsonp',

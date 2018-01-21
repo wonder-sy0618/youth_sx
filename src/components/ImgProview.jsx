@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import zeptojs from "zeptojs"
+import jquery from "jquery"
 import config from "../config"
 import imgtreat from "../common/imgtreat/"
 import qrcode from "qrcode"
@@ -232,7 +232,7 @@ export default class ImgProview extends Component {
 
   componentDidMount() {
     let comp = this;
-    zeptojs.ajax({
+    jquery.ajax({
       url : config.apiBase + "list?id=" + comp.props.match.params.id,
       dataType : 'json',
       success : function(json) {

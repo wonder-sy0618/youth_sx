@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import zeptojs from "zeptojs"
+import jquery from "jquery"
 import config from "../config"
 
 import List from "antd-mobile/lib/list"
@@ -19,7 +19,7 @@ export default class CompUploadHistory extends Component {
 
   componentDidMount() {
     let comp = this;
-    zeptojs.ajax({
+    jquery.ajax({
       url : config.apiBase + "list?uid=" + this.props.uid,
       dataType : 'json',
       success : function(json) {
@@ -48,7 +48,7 @@ export default class CompUploadHistory extends Component {
                 comp.setState({
                   history : history
                 })
-                zeptojs.ajax({
+                jquery.ajax({
                   url : config.apiBase + "delete?uid=" + comp.props.uid + "&id=" + item.id,
                   dataType : 'json',
                   success : function(json) {

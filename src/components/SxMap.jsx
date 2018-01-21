@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import echarts from "echarts"
 import echartsGl from "echarts-gl"
 import geoJsonShanxi1 from "echarts/map/json/province/shanxi1.json"
-import zeptojs from "zeptojs"
+import jquery from "jquery"
+import config from "../config"
 import logo from "../res/logo.png"
 
 const demoData = {
@@ -25,12 +26,13 @@ export default class SxMap extends Component {
   constructor() {
     super();
     this.state = {
-      data : demoData
+      data : undefined,
+      chart : undefined
     }
   }
 
-  getAreaText(area) {
-    if (!this.state.data) {
+  getAreaText(data, area) {
+    if (!data) {
       return '';
     }
     if (!area) {
@@ -40,58 +42,22 @@ export default class SxMap extends Component {
       area = "陕西省," + area;
     }
     let count = 0;
-    for (let i=0; i<Object.keys(this.state.data.areas).length; i++) {
-      let areaKey = Object.keys(this.state.data.areas)[i];
+    for (let i=0; i<Object.keys(data.areas).length; i++) {
+      let areaKey = Object.keys(data.areas)[i];
       if (areaKey.indexOf(area) >= 0) {
-        count = count + this.state.data.areas[areaKey].length;
+        count = count + data.areas[areaKey].length;
       }
     }
     area = area.indexOf(",") >= 0 ? area.substring(area.lastIndexOf(",")+1, area.length) : area;
     return "有"+count+"位"+area+"的好青年代言";
   }
 
-  componentDidMount() {
-    // 基于准备好的dom，初始化echarts实例
+  updateCahrt(data) {
     let comp = this;
-    let myChart = echarts.init(document.getElementById('main'));
-    echarts.registerMap('shanxi1', geoJsonShanxi1);
-    {
-      let lastEventTime = new Date();
-      myChart.on('click', function (params) {
-        lastEventTime = new Date();
-        var city = params.name;
-        myChart.setOption({
-          title: {
-            text : comp.getAreaText(city)
-          },
-          // 非第一次刷新，不再显示动画
-          series : [{
-            progressiveThreshold : 1000000,
-            progressive : 1000000
-          }]
-        });
-      });
-      zeptojs(document).on("click", "#main canvas", e => {
-        if (new Date().getTime() - lastEventTime.getTime() < 500) {
-          // 忽略点在地图内部的事件
-          return false;
-        }
-        myChart.setOption({
-          title: {
-            text : comp.getAreaText()
-          },
-          // 非第一次刷新，不再显示动画
-          series : [{
-            progressiveThreshold : 1000000,
-            progressive : 1000000
-          }]
-        });
-      })
-    }
-    myChart.setOption({
+    this.state.chart.setOption({
       backgroundColor: '#404a59',
       title : {
-          text : comp.getAreaText(),
+          text : this.getAreaText(this.state.data),
           left: 'center',
           top: 'top',
           textStyle: {
@@ -117,21 +83,44 @@ export default class SxMap extends Component {
           }
       },
       graphic: [{
+        type : 'rect',
+        shape : {
+          width : 120,
+          height : 30
+        },
+        style : {
+          fill : "#cecece",
+          lineWidth : 1,
+          stroke : "#d9d9d9"
+        },
+        right : 10,
+        bottom : 10,
+        onclick: () => {
+          // 折叠
+          jquery(".pageIndexDialog").animate({
+            overflow: 'auto',
+            marginLeft : window.innerWidth - 20,
+            width : 10,
+            height : 10,
+            top : 30
+          }, 800, () => {
+            jquery(".pageIndexDialog").hide();
+          })
+        }
+      }, {
           type: 'text',
-          right: 40,
+          right: 50,
           bottom: 20,
-          z: -10,
           bounding: 'raw',
           origin: [75, 75],
           style: {
               text: '点击进入',
-              width: 150,
-              height: 150,
+              fill: '#000',
+              stroke: '#000',
+              width : 120,
+              height : 30,
               opacity: 0.4,
               font: 'bolder 1.2em "Microsoft YaHei", sans-serif'
-          },
-          onclick: () => {
-            console.log("111")
           }
       }],
       series: [{
@@ -150,10 +139,12 @@ export default class SxMap extends Component {
             progressiveThreshold: 100,  // 启用渐进渲染的阈值，渐进渲染可以让你在加载画面的过程中不会有阻塞。
             progressive: 100,           // 渐进渲染每次渲染的数据量。
             data: (() => {
+              console.log(data)
+              if (!data) return [];
               let arr = [];
-              for (let i=0; i<Object.keys(comp.state.data.areas).length; i++) {
-                let key = Object.keys(comp.state.data.areas)[i];
-                arr = arr.concat(comp.state.data.areas[key])
+              for (let i=0; i<Object.keys(data.areas).length; i++) {
+                let key = Object.keys(data.areas)[i];
+                arr = arr.concat(data.areas[key])
               }
               return arr;
             })()
@@ -161,11 +152,67 @@ export default class SxMap extends Component {
     });
   }
 
+  componentDidMount() {
+    // 基于准备好的dom，初始化echarts实例
+    let comp = this;
+    this.state.chart = echarts.init(document.getElementById('main'));
+    echarts.registerMap('shanxi1', geoJsonShanxi1);
+    {
+      let lastEventTime = new Date();
+      this.state.chart.on('click', function (params) {
+        lastEventTime = new Date();
+        var city = params.name;
+        comp.state.chart.setOption({
+          title: {
+            text : comp.getAreaText(comp.state.data, city)
+          },
+          // 非第一次刷新，不再显示动画
+          series : [{
+            progressiveThreshold : 1000000,
+            progressive : 1000000
+          }]
+        });
+      });
+      comp.updateCahrt(comp.state.data)
+      jquery(document).on("click", "#main canvas", e => {
+        if (new Date().getTime() - lastEventTime.getTime() < 500) {
+          // 忽略点在地图内部的事件
+          return false;
+        }
+        this.state.chart.setOption({
+          title: {
+            text : comp.getAreaText(comp.state.data)
+          },
+          // 非第一次刷新，不再显示动画
+          series : [{
+            progressiveThreshold : 1000000,
+            progressive : 1000000
+          }]
+        });
+      })
+    }
+
+    if (!this.state.data) {
+      this.state.chart.showLoading();
+      jquery.getJSON(config.apiBase+"mapdata", json => {
+        this.setState({
+          data: json
+        })
+        comp.updateCahrt(json)
+        comp.state.chart.hideLoading();
+        comp.props.onReady();
+      })
+    } else {
+      comp.state.chart.hideLoading();
+    }
+  }
+
   render() {
     return (
       <div id="main" style={{
-        width: '100%',
-        height: '600px'
+        width: window.innerWidth,
+        height: window.innerHeight,
+        backgroundColor: 'rgba(64, 74, 89, 0.85)'
       }}>
       </div>
     )

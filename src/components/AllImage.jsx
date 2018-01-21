@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import zeptojs from "zeptojs"
+import jquery from "jquery"
 import config from "../config"
 
 import Flex from "antd-mobile/lib/flex"
@@ -26,7 +26,7 @@ export default class AllImage extends Component {
     comp.setState({
       loading : true
     })
-    zeptojs.ajax({
+    jquery.ajax({
       url : config.apiBase + "list?page=10&lastid=" + (comp.state.oriList.length > 0 ? comp.state.oriList[comp.state.oriList.length-1].id : '99999999'),
       dataType : 'json',
       success : function(json) {

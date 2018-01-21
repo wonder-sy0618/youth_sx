@@ -93,6 +93,29 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+anima-fx@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/anima-fx/-/anima-fx-2.0.1.tgz#2c7e26bc2a54ab2657664406b6be5b4e9706848e"
+  dependencies:
+    anima-yocto-lite "~2.0.0"
+
+anima-yocto-core@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/anima-yocto-core/-/anima-yocto-core-2.0.3.tgz#c0beab915b917ca9c754a4728835b468a4b154fa"
+
+anima-yocto-event@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/anima-yocto-event/-/anima-yocto-event-2.0.3.tgz#c55fe6fd5eac9c191ba4c3f10841e38bde832f47"
+  dependencies:
+    anima-yocto-core "^2.0.0"
+
+anima-yocto-lite@~2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/anima-yocto-lite/-/anima-yocto-lite-2.0.2.tgz#47c4c939903c376db2df8daf1208c37cedf50688"
+  dependencies:
+    anima-yocto-core "^2.0.0"
+    anima-yocto-event "^2.0.0"
+
 ansi-align@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ansi-align/-/ansi-align-1.1.0.tgz#2f0c1658829739add5ebb15e6b0c6e3423f016ba"
@@ -3844,6 +3867,10 @@ jest@20.0.4:
   dependencies:
     jest-cli "^20.0.4"
 
+jquery@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+
 js-base64@^2.1.9:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.0.tgz#9e566fee624751a1d720c966cd6226d29d4025aa"
@@ -7227,9 +7254,9 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zeptojs@^1.1.4:
+jquery@^1.1.4:
   version "1.1.4"
-  resolved "https://registry.yarnpkg.com/zeptojs/-/zeptojs-1.1.4.tgz#82858c6093fa59f672f3e450f30c93ba49e05cca"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.1.4.tgz#82858c6093fa59f672f3e450f30c93ba49e05cca"
 
 zrender@4.0.1:
   version "4.0.1"
