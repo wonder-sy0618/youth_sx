@@ -50,14 +50,14 @@ def upload(request):
         uid=request.POST["uid"], \
         addtime=datetime.datetime.now().strftime("%Y%m%d%H%M%S"), \
         status_remove=0, \
-        imgid=request.POST["imgid"], \
-        iname=request.POST["iname"], \
-        imghdw=request.POST["imghdw"],  \
-        itext=request.POST["itext"], \
-        iam=request.POST["iam"], \
-        igps=request.POST["igps"], \
-        igpswhere=request.POST["igpswhere"], \
-        iwhere=request.POST["iwhere"] \
+        imgid=("imgid" in request.POST ? request.POST["imgid"] : ""), \
+        iname=("iname" in request.POST ? request.POST["iname"] : ""), \
+        imghdw=("imghdw" in request.POST ? request.POST["imghdw"] : 1),  \
+        itext=("itext" in request.POST ? request.POST["itext"] : ""), \
+        iam=("iam" in request.POST ? request.POST["iam"] : ""), \
+        igps=("igps" in request.POST ? request.POST["igps"] : ""), \
+        igpswhere=("igpswhere" in request.POST ? request.POST["igpswhere"] : "陕西省"), \
+        iwhere=("iwhere" in request.POST ? request.POST["iwhere"] : "") \
         )
     item.save()
     return HttpResponse(serializers.serialize('json', [item,]))
