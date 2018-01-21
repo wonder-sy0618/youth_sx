@@ -12,6 +12,49 @@ from hashlib import sha1 as sha
 
 from api.models import Item
 
+defLocalGPS = {
+    '陕西省,西安市' : [108.9538527927,34.3469507423],
+    '陕西省,铜川市' : [108.9515311037,34.9030407400],
+    '陕西省,宝鸡市' : [107.2438442824,34.3678424177],
+    '陕西省,咸阳市' : [108.7157001898,34.3356398252],
+    '陕西省,渭南市' : [109.5167465261,34.5056530314],
+    '陕西省,汉中市' : [107.0301902437,33.0738288757],
+    '陕西省,安康市' : [109.0359067046,32.6906350671],
+    '陕西省,商洛市' : [109.9468933267,33.8764464205],
+    '陕西省,延安市' : [109.4963424332,36.5910460325],
+    '陕西省,榆林市' : [109.7411742617,38.2909664764]
+}
+
+def mapdata(request):
+    cursor = connection.cursor()
+    cursor.execute( \
+            "select iwhere, igps, igpswhere "+\
+            "FROM api_item i where status_remove = 0 "+\
+            "order by id"\
+        )
+    areaMap = {}
+    for row in cursor.fetchall():
+        iwhere = row[0]
+        igps = row[1]
+        igpswhere = row[2]
+        #
+        # let key = igpswhere if igpswhere != '陕西省' or igpswhere != '陕西省,,' else '陕西省,西安市,莲湖区'
+        # let gps = igps if igps != '' else '108.9533138360,34.2655919355'
+        if igpswhere == '陕西省' or igpswhere == '陕西省,,':
+            igpswhere = '陕西省,西安市,莲湖区'
+        if igpswhere not in areaMap:
+            areaMap[igpswhere] = []
+        if (igps != '' or igps.find(",") >= 0):
+            areaMap[igpswhere].extend([[ \
+                igps.split(",")[0], \
+                igps.split(",")[1], \
+            ]])
+        else:
+            defLocalKey = iwhere[0:igpswhere.rfind(",")]
+            if (defLocalKey in defLocalGPS):
+                areaMap[igpswhere].extend([defLocalGPS[defLocalKey]])
+    return HttpResponse(json.dumps({'areas' : areaMap}, ensure_ascii=False))
+
 def list(request):
     andWhere = " and status_remove = 0 "
     sqlArges = []
