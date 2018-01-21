@@ -13,3 +13,4 @@ class Item(models.Model):
     itext = models.CharField(max_length=50, default="")
     iwhere = models.CharField(max_length=50, default="陕西省,,")
     igps = models.CharField(max_length=50, default="")
+    igpswhere = models.CharField(max_length=50, default="陕西省,,")

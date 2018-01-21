@@ -55,6 +55,8 @@ def upload(request):
         imghdw=request.POST["imghdw"],  \
         itext=request.POST["itext"], \
         iam=request.POST["iam"], \
+        igps=request.POST["igps"], \
+        igpswhere=request.POST["igpswhere"], \
         iwhere=request.POST["iwhere"] \
         )
     item.save()
