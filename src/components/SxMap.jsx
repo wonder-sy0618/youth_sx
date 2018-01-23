@@ -5,6 +5,7 @@ import geoJsonShanxi1 from "echarts/map/json/province/shanxi1.json"
 import jquery from "jquery"
 import config from "../config"
 import logo from "../res/logo.png"
+import moment from "moment"
 
 const demoData = {
   areas : {
@@ -105,6 +106,7 @@ export default class SxMap extends Component {
             top : 30
           }, 800, () => {
             jquery(".pageIndexDialog").hide();
+            localStorage.showLastTime = moment().format('YYYYMMDD')
           })
         }
       }, {
@@ -200,7 +202,9 @@ export default class SxMap extends Component {
         })
         comp.updateCahrt(json)
         comp.state.chart.hideLoading();
-        comp.props.onReady();
+        if (!localStorage.showLastTime || localStorage.showLastTime != moment().format('YYYYMMDD')) {
+          comp.props.onReady();
+        }
       })
     } else {
       comp.state.chart.hideLoading();
