@@ -2,8 +2,11 @@
 
 .imgItem {
   position: relative;
+  margin: 16px 4px;
+  overflow: hidden;
+  box-shadow: -2px 4px 1px #b3b2b2;
 }
-.imgItem div {
+.imgItem > div {
   position: absolute;
 }
 
@@ -26,30 +29,38 @@
     font-size: 14px;
     text-shadow:5px 2px 6px #000;
 }
-.imgItem.item_vertical_1 .local {
-    top: 18%;
+.imgItem .localTag {
+  top: 0px;
+  left: 0px;
+  color: rgb(218, 218, 218);
+  background-color: #ff000099;
+  text-align: center;
+  font-size: 12px;
+  padding: 2px;
 }
-.imgItem.item_horizontal_1 .local {
-    top: 26%;
+.imgItem .itemTextBox {
+  position: inherit;
+  margin-top: -4px;
+  padding: 5px;
+  border: 1px solid rgb(175, 174, 174);
+  font-family: "微软雅黑",sans-serif;
+  font-size: 13px;
+  background-color: #f1f1f1;
 }
-.imgItem .declaration_title {
-  display:none;
-  left : 10px;
-  top: 45%;
-  color: #c13328;
-  font-size: 14px;
-  text-shadow: 5px 2px 6px #000;
+.imgItem .itemTextBox .itemTextName {
+  text-align: right;
+  margin-right: 20px;
+  padding-bottom: 10px;
 }
-.imgItem .declaration_content {
-  left : 30px;
-  color: #c13328;
-  font-size: 16px;
-  text-shadow: 2px 2px 3px #807d7d;
-  font-family: STKaiti,SimHei,"STXinwei","微软雅黑",sans-serif;
+.imgItem .itemTextBox .itemTextContent {
+      padding: 10px;
+      line-height: 20px;
 }
-.imgItem.item_vertical_1 .declaration_content {
-  top: 60%;
+.imgItem .itemTextBox .itemTextLocal {
+  font-size: 11px;
+  color: #616161;
 }
-.imgItem.item_horizontal_1 .declaration_content {
-  top: 50%;
+.imgItem .itemTextBox .itemTextLocal > img {
+  width : 12px;
+  margin-right: 5px;
 }
