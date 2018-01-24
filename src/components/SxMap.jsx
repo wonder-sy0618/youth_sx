@@ -196,7 +196,10 @@ export default class SxMap extends Component {
 
     if (!this.state.data) {
       this.state.chart.showLoading();
-      jquery.getJSON(config.apiBase+"mapdata", json => {
+      jquery.getJSON(
+        // config.apiBase+"mapdata",
+        config.resBase + "mapdata.json",
+        json => {
         this.setState({
           data: json
         })
