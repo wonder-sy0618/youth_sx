@@ -43,8 +43,8 @@ def list(request):
             ") t "+\
             "where 1 = 1 and id = ? "+\
             "order by id desc", \
-            sqlArges)
-        results = [request.GET['id']]
+            [request.GET['id']])
+        results = []
         columns = [column[0] for column in cursor.description]
         for row in cursor.fetchall():
             results.append(dict(zip(columns, row)))
