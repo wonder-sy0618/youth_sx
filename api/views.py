@@ -32,7 +32,23 @@ def list(request):
     if 'uid' in request.GET:
         data = [val for val in data if val['uid'] == request.GET['uid']]
     elif 'id' in request.GET:
-        data = [val for val in data if val['id'] == int(request.GET['id'])]
+        # ID的查询使用实时查询
+        cursor = connection.cursor()
+        cursor.execute( \
+            "select * from (" +\
+            "SELECT id," +\
+                "(select count(1) +1 from api_item si where si.iwhere = i.iwhere and si.id < i.id) as iwhereid, " +\
+                "uid, addtime, status_remove, imgid, iam, itext, iwhere, imghdw, iname, igps, igpswhere "+\
+                "FROM api_item i "+\
+            ") t "+\
+            "where 1 = 1 "+andWhere+\
+            "order by id desc", \
+            sqlArges)
+        results = []
+        columns = [column[0] for column in cursor.description]
+        for row in cursor.fetchall():
+            results.append(dict(zip(columns, row)))
+        data = results
     if 'page' in request.GET:
         return HttpResponse(json.dumps(data[:int(request.GET['page'])], ensure_ascii=False))
     else:
