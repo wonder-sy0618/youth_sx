@@ -5,6 +5,7 @@ from django.db import connection, transaction
 from django.core.paginator import Paginator
 from api.configure import configure
 import time
+import datetime
 import random
 import json
 from api.tasks import updateMapData
