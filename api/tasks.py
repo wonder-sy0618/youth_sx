@@ -9,7 +9,6 @@ import requests
 import urllib
 from api.qcloud_cos.cos_client import CosS3Client, CosConfig
 from requests import Request, Session
-from cos_lib3.cos import Cos
 from api.configure import configure
 from django.db import connection, transaction
 from api.service import service as apiService
