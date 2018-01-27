@@ -4,11 +4,13 @@ from django.core import serializers
 from django.db import connection, transaction
 from django.core.paginator import Paginator
 from api.configure import configure
-import oss2
+import time
+import random
 import json
 from api.tasks import updateMapData
 from api.tasks import updateIndexData
 
+from api.qcloud_cos.cos_client import CosS3Client, CosConfig
 from api.models import Item
 from api.service import service as apiService
 
@@ -58,7 +60,20 @@ def delete(request):
 
 
 def upload_token(request):
-    token_dict = apiService.aliOssToken(configure.upload_dir)
+    config = CosConfig(Region=configure.cosRegion, Secret_id=configure.cosAccessId, Secret_key=configure.cosPrivateKey, Token='')
+    client = CosS3Client(config)
+    if ('filename' in request.GET):
+        fileName = request.GET['filename']
+    else:
+        fileName = "upload/" + time.strftime("%Y%m%d%H%M%S") + str(random.randint(1000,9999)) + ".jpg"
+    token_dict = {
+        'uploadUrl' : configure.cosHost + "/" + fileName,
+        'authorization' : client.get_auth(
+            Method="PUT",
+            Bucket=configure.cosBucket,
+            Key=fileName,
+        )
+    }
     result = json.dumps(token_dict)
     # jsonp support
     if ("callback" in request.GET):

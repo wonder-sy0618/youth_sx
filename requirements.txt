@@ -4,3 +4,5 @@ django
 django-cors-headers
 schedule
 oss2
+mysqlclient
+dicttoxml

@@ -5,7 +5,11 @@ import logging
 import os
 import tempfile
 import json
-import oss2
+import requests
+import urllib
+from api.qcloud_cos.cos_client import CosS3Client, CosConfig
+from requests import Request, Session
+from cos_lib3.cos import Cos
 from api.configure import configure
 from django.db import connection, transaction
 from api.service import service as apiService
@@ -55,17 +59,24 @@ def updateMapData():
         needUpload = True
     else:
         print("no change")
+    needUpload = True       # debug
     if needUpload:
         print("upload file")
-        # upload
-        auth = oss2.Auth(configure.accessKeyId, configure.accessKeySecret)
-        bucket = oss2.Bucket(auth, configure.endPoint, configure.bucket)
-        bucket.put_object('mapdata.json', areaMapJson)
         # catch
         file_object = open(tmpfile, 'w')
         file_object.write(areaMapJson)
         file_object.close()
-
+        # upload
+        with open(tmpfile, 'rb') as artifact:
+            config = CosConfig(Region=configure.cosRegion, Secret_id=configure.cosAccessId, Secret_key=configure.cosPrivateKey, Token='')
+            client = CosS3Client(config)
+            response = client.put_object(
+                Bucket=configure.cosBucket,
+                Body=artifact,
+                Key="data/mapdata.json",
+                CacheControl='no-cache',
+                ContentDisposition='mapdata.json'
+            )
 
 def updateIndexData():
     print("update index data")

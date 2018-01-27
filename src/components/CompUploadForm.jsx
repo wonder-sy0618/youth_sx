@@ -237,25 +237,19 @@ export default class CompUploadForm extends Component {
           context.drawImage(img, 0, 0, canvas.width, canvas.height);
           // canvas转为blob并上传
           canvas.toBlob(blob => {
+            //
+            let fileName = "upload/"+moment().format("YYYYMMDDHHmmss") + Math.ceil(Math.random()*1000) + ".jpg";
             // 开始上传
-            this.uploadToken().then(token => {
-              //
-              let fileName = token.dir + moment().format("YYYYMMDDHHmmss") + Math.ceil(Math.random()*1000) + ".jpg";
-              let url = config.resBase + fileName;
+            this.uploadToken(fileName).then(token => {
               // 图片ajax上传
               let xhr = new XMLHttpRequest();
-              xhr.open("POST", token.host, true);
-              let form = new FormData();
-              form.append("OSSAccessKeyId", token.accessid)
-              form.append("policy", token.policy)
-              form.append("Signature", token.signature)
-              form.append("key", fileName)
-              form.append("file", blob)
+              xhr.open("PUT", token.uploadUrl, true);
+              xhr.setRequestHeader('Authorization', token.authorization);
               xhr.onreadystatechange = (e) => {
                 if (xhr.readyState == 4) {
                   if (xhr.status == 204 || xhr.status == 200) {
                     this.setState({
-                      imgid : url,
+                      imgid : token.uploadUrl,
                       imghdw : canvas.height / canvas.width,
                       uploading : false
                     })
@@ -267,7 +261,7 @@ export default class CompUploadForm extends Component {
                   }
                 }
               }
-              xhr.send(form);
+              xhr.send(blob);
             }).catch(err => alert("error : " + err))
           }, "image/jpeg", config.pictureQuality);
         }
@@ -278,10 +272,13 @@ export default class CompUploadForm extends Component {
     dom.click();
   }
 
-  uploadToken() {
+  uploadToken(filename) {
     return new Promise((resolve, reject) => {
       jquery.ajax({
         url : config.apiBase + "upload_token",
+        data : {
+          filename : filename
+        },
         type : 'GET',
         dataType : 'jsonp',
         success : resolve,

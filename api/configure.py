@@ -5,6 +5,14 @@ class configure():
     endPoint = 'oss-cn-beijing.aliyuncs.com'
     bucket = 'testactive'
     host = 'http://testactive.oss-cn-beijing.aliyuncs.com';
+
+    cosAppId = "1256005526";
+    cosAccessId = "AKIDO5fE7n80MWTsKiJujk2DMRL5c3IOuBsT";
+    cosPrivateKey = "Yu66vnaBcsxqaUJ0VaZNzQfiZJsFQPCq";
+    cosHost = "http://ccyl-1256005526.cos.ap-shanghai.myqcloud.com";
+    cosRegion = "ap-shanghai";
+    cosBucket = 'ccyl-1256005526'
+
     expire_time = 30
     data_dir = 'data/'
     upload_dir = 'upload/'

@@ -1,8 +1,8 @@
 
 export default {
 
-  apiBase : "http://104.236.134.159:8000/api/",
-  resBase : "http://testactive.oss-cn-beijing.aliyuncs.com/",
+  apiBase : "http://118.89.189.167:8000/api/",
+  resBase : "http://ccyl-1256005526.cos.ap-shanghai.myqcloud.com",
   imageMaxSize : 1000,
   pictureQuality : 0.3,
 }
