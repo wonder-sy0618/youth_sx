@@ -41,7 +41,7 @@ def list(request):
                 "uid, addtime, status_remove, imgid, iam, itext, iwhere, imghdw, iname, igps, igpswhere "+\
                 "FROM api_item i "+\
             ") t "+\
-            "where 1 = 1 and id = ? "+\
+            "where 1 = 1 and id = %s "+\
             "order by id desc", \
             [request.GET['id']])
         results = []
