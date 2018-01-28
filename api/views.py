@@ -49,6 +49,24 @@ def list(request):
         for row in cursor.fetchall():
             results.append(dict(zip(columns, row)))
         data = results
+    elif 'audit' in request.GET:
+        # 带有审核状态的查询使用实时查询
+        cursor = connection.cursor()
+        cursor.execute( \
+            "select * from (" +\
+            "SELECT id," +\
+                "(select count(1) +1 from api_item si where si.iwhere = i.iwhere and si.id < i.id) as iwhereid, " +\
+                "uid, addtime, status_remove, status_audit, imgid, iam, itext, iwhere, imghdw, iname, igps, igpswhere "+\
+                "FROM api_item i "+\
+            ") t "+\
+            "where 1 = 1 and status_audit = %s "+\
+            "order by id desc", \
+            [request.GET['audit']])
+        results = []
+        columns = [column[0] for column in cursor.description]
+        for row in cursor.fetchall():
+            results.append(dict(zip(columns, row)))
+        data = results
     if 'page' in request.GET:
         return HttpResponse(json.dumps(data[:int(request.GET['page'])], ensure_ascii=False))
     else:
@@ -75,6 +93,9 @@ def delete(request):
     Item.objects.filter(id=int(request.GET['id'])).filter(uid=request.GET['uid']).update(status_remove=1)
     return HttpResponse('{"status" : "SUCCESS"}')
 
+def audit(request):
+    Item.objects.filter(id=int(request.GET['id'])).update(status_audit=(int(request.GET['status']) if 'status' in request.GET else 1))
+    return HttpResponse('{"status" : "SUCCESS"}')
 
 def upload_token(request):
     config = CosConfig(Region=configure.cosRegion, Secret_id=configure.cosAccessId, Secret_key=configure.cosPrivateKey, Token='')

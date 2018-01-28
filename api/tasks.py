@@ -79,14 +79,14 @@ def updateMapData():
 
 def updateIndexData():
     print("update index data")
-    andWhere = " and status_remove = 0 "
+    andWhere = " and status_remove = 0 and status_audit = 1 "
     sqlArges = []
     cursor = connection.cursor()
     cursor.execute( \
         "select * from (" +\
         "SELECT id," +\
             "(select count(1) +1 from api_item si where si.iwhere = i.iwhere and si.id < i.id) as iwhereid, " +\
-            "uid, addtime, status_remove, imgid, iam, itext, iwhere, imghdw, iname, igps, igpswhere "+\
+            "uid, addtime, status_remove, status_audit, imgid, iam, itext, iwhere, imghdw, iname, igps, igpswhere "+\
             "FROM api_item i "+\
         ") t "+\
         "where 1 = 1 "+andWhere+\

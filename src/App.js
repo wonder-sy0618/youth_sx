@@ -7,6 +7,7 @@ import uuidV1 from "uuid/v1"
 import PageIndex from "./components/PageIndex"
 import PageUpload from "./components/PageUpload"
 import ImgProview from "./components/ImgProview"
+import PageAudit from "./components/PageAudit"
 
 export default (props) => {
   let uid = window.localStorage ? window.localStorage['uid'] : undefined
@@ -23,6 +24,7 @@ export default (props) => {
               <Route exact path='/index' render={(props) => (<PageIndex uid={uid} ></PageIndex>)} />
               <Route exact path='/upload' render={(props) => (<PageUpload uid={uid} ></PageUpload>)} />
               <Route exact path='/proview/:id' render={(props) => (<ImgProview uid={uid} {...props} ></ImgProview>)} />
+              <Route exact path='/audit' render={(props) => (<PageAudit uid={uid} ></PageAudit>)} />
           </Switch>
       </HashRouter>
     </div>

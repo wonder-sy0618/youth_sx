@@ -20,6 +20,7 @@ from api.views import list as apiList
 from api.views import upload as apiUpload
 from api.views import upload_token as apiUploadToken
 from api.views import delete as apiDelete
+from api.views import audit as apiAudit
 from api.views import mapdata as apiMapdata
 from api.views import task_exec as apiTaskExec
 
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r'api/upload_token', apiUploadToken),
     url(r'api/upload', apiUpload),
     url(r'api/delete', apiDelete),
+    url(r'api/audit', apiAudit),
     url(r'api/mapdata', apiMapdata),
     url(r'api/task_exec', apiTaskExec),
     url(r'^$', view.index),
