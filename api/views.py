@@ -31,6 +31,8 @@ def list(request):
     data = indexData;
     if 'uid' in request.GET:
         data = [val for val in data if val['uid'] == request.GET['uid']]
+    elif 'lastid' in request.GET:
+        data = [val for val in data if val['id'] < int(request.GET['lastid'])]
     elif 'id' in request.GET:
         # ID的查询使用实时查询
         cursor = connection.cursor()
