@@ -14,6 +14,7 @@ import WingBlank from "antd-mobile/lib/wing-blank"
 import ImagePicker from "antd-mobile/lib/image-picker"
 import TextareaItem from "antd-mobile/lib/textarea-item"
 import InputItem from "antd-mobile/lib/input-item"
+import NoticeBar from "antd-mobile/lib/notice-bar"
 
 import demo5 from "../res/demos/demo5.jpg"
 
@@ -154,6 +155,11 @@ export default class CompUploadForm extends Component {
                     >上传</Button>
                 } >
                 晒出你向上向善的样子
+              </List.Item>
+              <List.Item>
+                <NoticeBar marqueeProps={{ loop: true, style: { padding: '0 7.5px' } }}>
+                  上传的图片将会在管理员审核后展示在首页，请勿重复上传。
+                </NoticeBar>
               </List.Item>
               <List.Item>
                 <div style={{textAlign:'right'}}>

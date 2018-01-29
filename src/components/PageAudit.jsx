@@ -57,10 +57,10 @@ export default class PageAudit extends Component {
     }
   }
 
-  componentDidMount() {
+  updateList() {
     let comp = this;
     jquery.ajax({
-      url : config.apiBase + "list?page=10&audit=0",
+      url : config.apiBase + "list?page=50&audit=0",
       dataType : 'json',
       success : function(json) {
         comp.setState({
@@ -68,6 +68,14 @@ export default class PageAudit extends Component {
         })
       }
     });
+  }
+
+  componentDidMount() {
+    this.updateList();
+    let comp = this;
+    window.setInterval(() => {
+      this.updateList.bind(comp)()
+    }, 1000 * 20)
   }
 
   render() {
