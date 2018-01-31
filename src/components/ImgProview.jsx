@@ -212,8 +212,8 @@ export default class ImgProview extends Component {
                 padding: '12px 0px',
                 fontSize: 13
               }}>
-                本次活动由陕西共青团宣传部组织，<br/>邀请您关注
-                  <a href="#" style={{
+                听说，身边的好青年都关注了→
+                  <a href="http://mp.weixin.qq.com/s/Ywxn_F3aDRy_igf3kW4upQ" style={{
                     color: 'red',
                     fontSize: 16,
                     margin: 6,
