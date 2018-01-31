@@ -2,21 +2,23 @@ import React, { Component } from 'react';
 import jquery from "jquery"
 import config from "../config"
 import imgtreat from "../common/imgtreat/"
-import qrcode from "qrcode"
 
 import Result from "antd-mobile/lib/result"
 import Icon from "antd-mobile/lib/icon"
 
 import Konva from "konva"
 import iconLocal from "../res/ic_local.png"
+import qrcode from "../res/qrcode.png"
 
+const scale = 0.5
 const conf = {
-  width : 1242,
-  heightAdd : 400,
+  scale : 0.5,
+  width : 1242 * scale,
+  heightAdd : 400 * scale,
   bgColor : "white",
-  bgImageBorder : 30,
-  iTextMarginBottom : 50,
-  qrcodeSize : 360
+  bgImageBorder : 30 * scale,
+  iTextMarginBottom : 50 * scale,
+  qrcodeSize : 360 * scale
 }
 
 export default class ImgProview extends Component {
@@ -50,6 +52,9 @@ export default class ImgProview extends Component {
       let imageObj = new Image();
       imageObj.onload = function() {
         resolve(imageObj)
+      }
+      imageObj.onerror  = function(e) {
+        alert("load image error > ", e)
       }
       imageObj.setAttribute("crossOrigin",'Anonymous');
       imageObj.src = src;
@@ -86,7 +91,7 @@ export default class ImgProview extends Component {
       let itext = "我是陕西好青年" + comp.state.item.iname + ", " + comp.state.item.itext;
       itext = itext + itext
       let itextFontFamily = "LiSu";
-      let itextFontSize = 60;
+      let itextFontSize = 60 * scale;
       let kt = new Konva.Text({
         x: x,
         y: y,
@@ -100,21 +105,8 @@ export default class ImgProview extends Component {
       h = h - kt.height() + conf.iTextMarginBottom;
 
     }).then(() => {
-      // 转换二维码
-      return qrcode.toDataURL(
-        window.location.href.substring(0, window.location.href.indexOf("#") >= 0
-                                            ? window.location.href.indexOf("#")
-                                            : window.location.href.length),
-          {
-            margin : 2,
-            width : 128,
-            height : 128
-          }
-        )
-
-    }).then(url => {
       // 加载二维码图片
-      return this.loadImage(url)
+      return this.loadImage(qrcode)
 
     }).then(imageQrcode => {
       // 绘制图片
@@ -126,7 +118,7 @@ export default class ImgProview extends Component {
         image: imageQrcode
       });
       layer.add(ki)
-      w = w - conf.qrcodeSize
+      w = w - conf.qrcodeSize * scale
 
     }).then(() => {
       // 加载位置图标
@@ -136,17 +128,17 @@ export default class ImgProview extends Component {
       // 输出位置图标
       layer.add(new Konva.Image({
         x: x,
-        y: y + conf.qrcodeSize - 70,
-        width : 50,
-        height : 50,
+        y: y + conf.qrcodeSize - 60 * scale,
+        width : 50 * scale,
+        height : 50 * scale,
         image: img
       }))
       // 输出位置
       layer.add(new Konva.Text({
-        x: x + 50,
-        y: y + conf.qrcodeSize - 50,
+        x: x + 55 * scale,
+        y: y + conf.qrcodeSize - 40 * scale,
         text: "我是" + comp.state.item.iwhere.replace("陕西省,","").replace(",","") + "第" + comp.state.item.iwhereid + "位陕西好青年代言人",
-        fontSize: 36,
+        fontSize: 36 * scale,
         fontFamily: "微软雅黑",
         fill: 'black'
       }))
@@ -215,9 +207,26 @@ export default class ImgProview extends Component {
         <Result
           img={<Icon type="check-circle" className="spe" style={{ fill: '#1F90E6' }} />}
           title="上传成功"
-          message="请长按下方的图片，保存到手机"
+          message={
+            <div>
+              <div style={{
+                padding: '12px 0px',
+                fontSize: 13
+              }}>
+                本次活动由陕西共青团宣传部组织，<br/>邀请您关注
+                  <a href="#" style={{
+                    color: 'red',
+                    fontSize: 16,
+                    margin: 6,
+                    fontWeight: 'bold'
+                  }}
+                  >三秦青年</a>
+              </div>
+              <div>请长按下方的图片，保存到手机</div>
+            </div>
+          }
         />
-        <div id="container" style={{"display" : "none"}} ></div>
+        <div id="container" style={{"display":"none"}} ></div>
         <div style={{ padding: 10 }}>
           <img src={this.state.proview}
               style={{

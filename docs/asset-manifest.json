@@ -1,10 +1,11 @@
 {
   "main.css": "static/css/main.24b6e225.css",
   "main.css.map": "static/css/main.24b6e225.css.map",
-  "main.js": "static/js/main.4a83a067.js",
-  "main.js.map": "static/js/main.4a83a067.js.map",
+  "main.js": "static/js/main.c3d021cc.js",
+  "main.js.map": "static/js/main.c3d021cc.js.map",
   "static\\media\\demo3.jpg": "static/media/demo3.bba86529.jpg",
   "static\\media\\demo5.jpg": "static/media/demo5.41cd97c3.jpg",
   "static\\media\\ic_local.png": "static/media/ic_local.a6032630.png",
-  "static\\media\\logo.png": "static/media/logo.f90cce70.png"
+  "static\\media\\logo.png": "static/media/logo.f90cce70.png",
+  "static\\media\\qrcode.png": "static/media/qrcode.b175a105.png"
 }

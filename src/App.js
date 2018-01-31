@@ -24,7 +24,7 @@ export default (props) => {
               <Route exact path='/index' render={(props) => (<PageIndex uid={uid} ></PageIndex>)} />
               <Route exact path='/upload' render={(props) => (<PageUpload uid={uid} ></PageUpload>)} />
               <Route exact path='/proview/:id' render={(props) => (<ImgProview uid={uid} {...props} ></ImgProview>)} />
-              <Route exact path='/audit' render={(props) => (<PageAudit uid={uid} ></PageAudit>)} />
+              <Route exact path='/auditnew6' render={(props) => (<PageAudit uid={uid} ></PageAudit>)} />
           </Switch>
       </HashRouter>
     </div>
