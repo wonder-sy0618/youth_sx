@@ -89,7 +89,6 @@ export default class ImgProview extends Component {
     }).then(() => {
       // 宣言文字
       let itext = "我是陕西好青年" + comp.state.item.iname + ", " + comp.state.item.itext;
-      itext = itext + itext
       let itextFontFamily = "LiSu";
       let itextFontSize = 60 * scale;
       let kt = new Konva.Text({
