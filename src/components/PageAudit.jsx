@@ -17,7 +17,7 @@ const PageAuditItem = (props) => {
           <Card.Body>
             <div>{props.item.itext}</div>
           </Card.Body>
-          <Card.Footer content={props.item.igpswhere} extra={
+          <Card.Footer content={props.item.iwhere} extra={
             <div style={{}}>
               <Button type="warning" inline size="small" style={{ marginRight: '4px' }}
                 onClick={(() => {
