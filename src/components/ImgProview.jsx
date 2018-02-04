@@ -75,7 +75,7 @@ export default class ImgProview extends Component {
         lines[lines.length-1] = lines[lines.length-1] + text[i]
 
       } else {
-        lines[lines.length-1] = lines[lines.length-1]
+        lines[lines.length-1] = str
         lines.push("")
       }
     }
@@ -94,7 +94,7 @@ export default class ImgProview extends Component {
       let kt = new Konva.Text({
         x: x,
         y: y,
-        text: comp.buildText(itext, w - conf.qrcodeSize, itextFontSize, itextFontFamily),
+        text: comp.buildText(itext, w - conf.qrcodeSize - 50, itextFontSize, itextFontFamily),
         fontSize: itextFontSize,
         fontFamily: itextFontFamily,
         fill: 'black'
